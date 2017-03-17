@@ -1,0 +1,453 @@
+<% include header.ejs %>
+<style>
+	form{
+		color:#000;
+		font-size: 14px;
+	}
+	label{
+		color:#000;
+	}
+	.nope{
+		background-color:#ccc;
+	}
+	.error{
+		color:#ff5959;
+	}
+	.sure{
+		color:#11ff11;
+	}
+	textarea{
+		width:100%;
+		border-radius: 6px;
+	}
+	h3,.produce li{
+		color:#ccc;
+		line-height: 30px;
+	}
+	.box{
+		padding: 20px 20px 10px;
+		border-radius: 8px;
+		border:3px solid #ccc;
+	}
+	.box-top{
+		margin-top: 30px;
+	}
+	.del-song,.up-song{
+		color:#67b9e0!important;
+	}
+	.function-tip{
+		color:#fff;
+	}
+
+</style>
+<div id="func" data-daxie="<%= user.daxie %>" data-liaotian="<%= user.liaotian %>" data-read="<%= user.read %>" data-danmu="<%= user.danmu %>" data-song="<%= user.song %>" data-dxtime="<%= user.dxTime %>" data-lttime="<%= user.ltTime %>" data-readtime="<%= user.readTime %>"  data-danmutime="<%= user.danmuTime %>"  data-songtime="<%= user.songTime %>"></div>
+<h5 class='function-tip'>机器人手机号密码是指找一个触手账号作为机器人，右边下拉可以看到更多功能哦。作者QQ：1765898853。</h5>
+	<div class="col-md-6 box">
+		 <form method="post" class="form-horizontal form-gx form-disable">
+		<fieldset>
+			<% if (user.daxie == 1) { %>
+			    <legend>答谢机器人</legend>
+			<% } else { %>
+				<% if (user.daxie == 2) { %>
+				<legend>答谢机器人(月卡)</legend>
+				<% } else { %>
+				<legend>答谢机器人（功能未激活）</legend>
+				<% } %>
+			<% } %>
+			 
+			 <div class="form-group">
+			<label class="col-md-3 control-label">房间</label>
+			<div class="col-md-8">
+				<input class="form-control col-md-7 room-dx input-gx" type="text" name="room"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">机器人手机号</label>
+			<div class="col-md-8">
+				<input class="form-control col-md-7 phone-dx input-gx" type="text" name="phone"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">机器人密码</label>
+			<div class="col-md-8">
+				<input class="form-control col-md-7 pwd-dx input-gx" type="password" name="pwd"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">答谢礼物类型（多选）</label>
+			<div class="col-md-8">
+				 <label class="col-md-2 control-label">
+			     	泡泡 <input type="checkbox" class="check check1" data-level="1" checked>
+			    </label>
+			     <label class="col-md-2 control-label">
+			     	海螺 <input type="checkbox" class="check check1" data-level="3" checked>
+			    </label>
+			     <label class="col-md-2 control-label">
+			     	海星 <input type="checkbox" class="check check1" data-level="5" checked>
+			    </label>
+			     <label class="col-md-2 control-label">
+			     	海马 <input type="checkbox" class="check check1" data-level="6" checked>
+			    </label>
+			    <label class="col-md-2 control-label">
+			     	海豚 <input type="checkbox" class="check check1" data-level="24" checked>
+			    </label>
+			     <label class="col-md-2 control-label">
+			     	珍珠 <input type="checkbox" class="check check1" data-level="7" checked>
+			    </label>
+			     <label class="col-md-2 control-label">
+			     	鱼 <input type="checkbox" class="check check1" data-level="14" checked>
+			    </label>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">答谢弹幕库（随机抽取一条作为答谢词）</label>
+			<div class="col-md-8">
+				<textarea rows="10" class="content-dx" placeholder="示例：谢谢送礼人的礼物"></textarea>
+			</div>
+		</div>
+		
+		<div class="col-md-8 col-md-offset-3">
+			    <div  class="btn btn-primary startDaxie" >开始</div>
+			    <div  class="btn btn-primary endDaxie nope" >停止</div><span class="sure">&nbsp;&nbsp;&nbsp;&nbsp;介绍其他人购买，交易成功则奖励红包5元哦</span>
+		</div><br>
+		<div class="col-md-8 col-md-offset-3">
+			    <p class="error tip-gx"></p>
+		</div>
+		</fieldset>
+		
+
+	</form>
+	</div>
+	<div class="col-md-5 col-md-offset-1 box">
+		<form method="post" class="form-horizontal form-lt">
+		<fieldset>
+			<% if (user.liaotian == 1) { %>
+			    <legend>聊天机器人</legend>
+			<% } else { %>
+				<% if (user.liaotian == 2) { %>
+				    <legend>聊天机器人(月卡)</legend>
+				<% } else { %>
+					<legend>聊天机器人（功能未激活）</legend>
+				<% } %>
+			<% } %>
+		
+		<div class="form-group">
+			<label class="col-md-3 control-label">房间</label>
+			<div class="col-md-8">
+				<input class="form-control col-md-7 room-lt input-lt" type="text" name="room"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">机器人手机号</label>
+			<div class="col-md-8">
+				<input class="form-control col-md-7 phone-lt input-lt" type="text" name="phone"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">机器人密码</label>
+			<div class="col-md-8">
+				<input class="form-control col-md-7 pwd-lt input-lt" type="password" name="pwd"/>
+			</div>
+		</div>
+		<div class="col-md-8 col-md-offset-3">
+			    <div  class="btn btn-primary startLt" >开始</div>
+			    <div  class="btn btn-primary endLt nope" >停止</div>
+		</div><br>
+		<div class="col-md-8 col-md-offset-3">
+			    <p class="error tip-lt"></p>
+		</div>
+</fieldset>
+	</form>
+	</div>
+		<div class="col-md-5 col-md-offset-1 box box-top">
+		<form method="post" class="form-horizontal from-read" data-username="<%= user.name %>">
+		<fieldset>
+			<% if (user.read == 1) { %>
+			    <legend>语音助手（读弹幕）</legend>
+			<% } else { %>
+					<% if (user.read == 2) { %>
+					    <legend>语音助手（读弹幕 月卡）</legend>
+					<% } else { %>
+						<legend>语音助手（读弹幕）（功能未激活）</legend>
+					<% } %>
+			<% } %>
+
+		<div class="form-group">
+			<label class="col-md-3 control-label">房间</label>
+			<div class="col-md-8">
+				<input class="form-control col-md-7 room-read  input-read" type="text"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">发音人</label>
+			<div class="col-md-8">
+					<select class="form-control input-read" id="testSelect">
+					  <option data-vcn="xiaoyan">青年女声</option>
+					  <option data-vcn="xiaofeng">青年男声</option>
+					  <option data-vcn="xiaomei">粤语</option>
+					  <option data-vcn="aisbabyxu">童声</option>
+					  <option data-vcn="aisxrong">四川话</option>
+					  <option data-vcn="aisxying">陕西话</option>
+					  <option data-vcn="aisxlin">台湾普通话</option>
+					  <option data-vcn="aisxqiang">湖南话</option>
+					</select>
+				<!--  <label class="col-md-2 control-label">
+			     	女声 <input type="checkbox" class="check check2" data-level="0" checked>
+			    </label>
+				 <label class="col-md-2 control-label">
+			     	男声 <input type="checkbox" class="check check2" data-level="1">
+			    </label>
+			    	<span class="sure">（至少选一个，如果两个都勾选，会随机选一个）</span> -->
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">语速</label>
+			<div class="col-md-8">
+				<input class="form-control col-md-7 spd  input-read" type="text" value="2"/><span class="sure">（1-5,5最快,1最慢）</span>
+			</div>
+		</div>
+		
+		<div class="col-md-8 col-md-offset-3">
+			    <div  class="btn btn-primary startRead" >开始</div>
+			    <div  class="btn btn-primary endRead nope" >停止</div><br>
+			    <!-- <p style="color:#fff">语音技术由科大讯飞提供</p> -->
+		</div><br>
+
+		<div class="col-md-8 col-md-offset-3">
+			    <p class="error tip-read"></p>
+		</div>
+</fieldset>
+	</form>
+	<iframe src="" frameborder="0" id="baidu" width="1px" height="1px"></iframe>
+	</div>
+
+
+	<!-- <div class="col-md-6 box" style="display:none;"> -->
+	<div class="col-md-5 box">
+		<form method="post" class="form-horizontal form-dm">
+		<fieldset>
+			<% if (user.danmu == 1) { %>
+			    <legend>弹幕机</legend>
+			<% } else { %>
+				<% if (user.danmu == 2) { %>
+				    <legend>弹幕机（月卡）</legend>
+				<% } else { %>
+				<legend>弹幕机（功能未激活）</legend>
+				<% } %>
+			<% } %>
+		<div class="form-group">
+			<label class="col-md-3 control-label">房间</label>
+			<div class="col-md-8">
+				<input class="form-control col-md-7 room-dm input-dm" type="text" name="room"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">弹幕库（回车键编写下一条弹幕）</label>
+			<div class="col-md-8">
+				<textarea rows="10" class="content-dm input-dm"></textarea>
+			</div>
+		</div>
+		
+		<div class="col-md-8 col-md-offset-3">
+			    <div  class="btn btn-primary start-dm" >开始</div>
+			    <div  class="btn btn-primary end-dm nope" >停止</div>
+		</div><br>
+		<div class="col-md-8 col-md-offset-3">
+			    <p class="error tip-dm"></p>
+		</div>
+</fieldset>
+	</form>
+	</div>
+
+
+<div class="col-md-6  col-md-offset-1 box box-top">
+		<form method="post" class="form-horizontal from-song" data-username="<%= user.name %>">
+		<fieldset>
+			<% if (user.song == 1) { %>
+			    <legend>点歌</legend>
+			<% } else { %>
+					<% if (user.song == 2) { %>
+					    <legend>点歌（月卡）</legend>
+					<% } else { %>
+						<legend>点歌（功能未激活）</legend>
+					<% } %>
+			<% } %>
+
+		<div class="form-group">
+			<label class="col-md-3 control-label">房间</label>
+			<div class="col-md-8">
+				<input class="form-control col-md-7 room-song  input-song" type="text"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">机器人手机号</label>
+			<div class="col-md-8">
+				<input class="form-control col-md-7 phone-song input-song" type="text" name="phone"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">机器人密码</label>
+			<div class="col-md-8">
+				<input class="form-control col-md-7 pwd-song input-song" type="password" name="pwd"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">正在播放</label>
+			<div class="col-md-8">
+				<label class="col-md-8 control-label isplaying" style="text-align:center;">--</label>
+				<div  class="btn btn-primary change-song nope" >切歌</div>
+			</div>
+			  <audio src="" autoplay='autoplay' controls="controls" id="order-audio" class="col-md-8 col-md-offset-3" style="margin-top:15px">
+				Your browser does not support the audio element.
+				</audio>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">弹幕点歌</label>
+			<div class="col-md-9">
+				<label class="control-label">输入弹幕： <span class="sure">点歌，歌名</span> 即可进行点歌</label>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<table id="tt" class="easyui-datagrid" style="width:100%;height:300px"
+		      title="待播放列表" iconCls="icon-save" url="" method='get' rownumbers='true',>
+		    <thead>
+		      <tr>
+		        <th field="songname" width="90" align="center">歌曲名</th>
+		        <th field="artistname" width="70" align="center">歌手</th>
+		        <th field="ordername" width="70" align="center" >点歌人</th>
+		        <!-- <th field="state" width="60" align="center" >状态</th> -->
+		        <th field="handler" width="140" align="center" formatter='orderHandler'>操作</th>
+		      </tr>
+		    </thead>
+		  </table>
+		</div>
+		<div class="col-md-8 col-md-offset-3">
+			    <div  class="btn btn-primary startSong" >开始</div>
+			    <div  class="btn btn-primary endSong nope" >停止</div><br>
+		</div><br>
+
+		<div class="col-md-8 col-md-offset-3">
+			    <p class="error tip-song"></p>
+		</div>
+
+	  
+</fieldset>
+	</form>
+</div>
+
+
+<% include footer.ejs %>
+<script src='/js/daxie.js'></script>
+<script src='/js/liaotian.js'></script>
+ <script src="/js/socket.io.js"></script>
+ <script src="/js/chat.js"></script>
+
+<script src='/js/danmu.js'></script>
+
+ <script type="text/javascript" src="/js/fingerprint.js"></script>
+ <script type="text/javascript" src="/js/tts.min.js"></script>
+ <script type="text/javascript" src="/js/tts_demo.js"></script>
+<script src='/js/read.js'></script>
+<script src='/js/song.js'></script>
+<script src="/js/jquery.easyui.min.js"></script>
+
+<script>
+$(function(){
+	var nowTime = new Date().getTime();
+	var lastMonthTime = nowTime - 30*24*60*60*1000; //一个月前的时间戳
+	//0 未激活 1 永久  2一月
+	if($('#func').data('daxie') == 1){
+		var daxie = new Daxie(); 
+		daxie.init();
+	}else{
+		if($('#func').data('daxie') == 2){
+			var dxTime = $('#func').data('dxtime');
+			if(dxTime < lastMonthTime){
+				$('.input-gx,.content-dx').attr('disabled',true)
+			}else{
+				var daxie = new Daxie(); 
+				daxie.init();
+			}
+		}else{
+			$('.input-gx,.content-dx').attr('disabled',true)
+		}
+		
+	}
+	if($('#func').data('liaotian') == 1){
+		var lt = new Liaotian(); 
+		lt.init();
+	}else{
+		if($('#func').data('liaotian') == 2){
+			var ltTime = $('#func').data('lttime');
+			if(ltTime < lastMonthTime){
+				$('.input-lt').attr('disabled',true)
+			}else{
+				var lt = new Liaotian(); 
+				lt.init();
+			}
+		}else{
+			$('.input-lt').attr('disabled',true)
+		}
+		
+	}
+	if($('#func').data('read') == 1){
+		var read = new Read(); 
+		read.init();
+	}else{
+		if($('#func').data('read') == 2){
+			var readTime = $('#func').data('readtime');
+			if(readTime < lastMonthTime){
+				$('.input-read').attr('disabled',true)
+			}else{
+				var read = new Read(); 
+				read.init();
+			}
+		}else{
+			$('.input-read').attr('disabled',true)
+		}
+		
+	}
+	if($('#func').data('danmu') == 1){
+		var danmu = new Danmu(); 
+		danmu.init();
+	}else{
+		if($('#func').data('danmu') == 2){
+			var danmuTime = $('#func').data('danmutime');
+			if(danmuTime < lastMonthTime){
+				$('.input-dm,.content-dm').attr('disabled',true)
+			}else{
+				var danmu = new Danmu(); 
+				danmu.init();
+			}
+		}else{
+			$('.input-dm,.content-dm').attr('disabled',true)
+		}
+		
+	}
+
+	if($('#func').data('song') == 1){
+		deleteAllSongFiles();//删除所有歌曲文件
+		var song = new Song(); 
+		song.init();
+	}else{
+		if($('#func').data('song') == 2){
+			// deleteAllSongFiles();//删除所有歌曲文件
+			var songTime = $('#func').data('songtime');
+			if(songTime < lastMonthTime){
+				$('.input-song').attr('disabled',true)
+			}else{
+				var song = new Song(); 
+				song.init();
+			}
+		}else{
+			$('.input-song').attr('disabled',true)
+		}
+		
+	}
+	$('#tt').datagrid('load',{});
+})
+
+	
+</script>
+

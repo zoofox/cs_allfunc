@@ -1,0 +1,69 @@
+<% include header.ejs %>
+<style>
+  td a{color:#0055ff;}
+  .line{
+   
+    width: 0px;height: 100%;
+    border:1px solid #888;
+  }
+</style>
+
+<table class="table table-condensed">
+ <tr>
+  <th class="success">用户名</td>
+  <th class="active">类型</td>
+  <th class="danger">注册时间</td>
+  <th class="danger">过期时间</td>
+  <th class="info">操作</td>
+ 
+</tr>
+<% for(var i=0; i<users.length; i++) {%>
+  <tr>
+  <td class="success"><%= users[i].name %></td>
+   <% if (users[i].type==0) { %>
+   <td class="active">永久</td>
+   <% } else { %>
+  <td class="active">一个月</td>
+    <% } %>
+  <td class="danger"><%= new Date(users[i].time).toLocaleString() %></td>
+   <% if (users[i].type==0) { %>
+   <td class="danger">永久</td>
+   <% } else { %>
+  <td class="danger"><%= new Date(parseInt(users[i].time)+2592000000).toLocaleString()  %></td>
+    <% } %>
+   
+  <td class="info" data-name=<%= users[i].name %>>
+    <a href="javascript:;" class="del">删除</a>
+    <a href="javascript:;" class="yongjiu">改为永久</a>
+    <a href="javascript:;" class="month">改为一个月</a>
+   <a href="" class="line"></a>
+    <a href="javascript:;" class="add-function" data-type="0">增加答谢</a>
+    <a href="javascript:;" class="del-function" data-type="0">删除答谢</a>
+    <a href="javascript:;" class="mon-function" data-type="0">一月答谢</a>
+      <a href="" class="line"></a>
+    <a href="javascript:;" class="add-function" data-type="1">增加聊天</a>
+    <a href="javascript:;" class="del-function" data-type="1">删除聊天</a>
+    <a href="javascript:;" class="mon-function" data-type="1">一月聊天</a>
+      <a href="" class="line"></a>
+    <a href="javascript:;" class="add-function" data-type="2">增加读弹幕</a>
+    <a href="javascript:;" class="del-function" data-type="2">删除读弹幕</a>
+     <a href="javascript:;" class="mon-function" data-type="2">一月读弹幕</a>
+      <a href="" class="line"></a>
+     <a href="javascript:;" class="add-function" data-type="3">增加弹幕机</a>
+    <a href="javascript:;" class="del-function" data-type="3">删除弹幕机</a>
+    <a href="javascript:;" class="mon-function" data-type="3">一月弹幕机</a>
+      <a href="" class="line"></a>
+           <a href="javascript:;" class="add-function" data-type="4">增加点歌</a>
+    <a href="javascript:;" class="del-function" data-type="4">删除点歌</a>
+    <a href="javascript:;" class="mon-function" data-type="4">一月点歌</a>
+      <a href="" class="line"></a>
+    <a href="javascript:;" class="pwd">改密码</a>
+    <input type="text" class="newpwd" placeholder="input new pwd and click left button">
+  </td>
+
+</tr>
+<% } %>
+</table>
+
+<% include footer.ejs %>
+<script src="/js/user.js"></script>

@@ -1,0 +1,162 @@
+<% include header.ejs %>
+<style>
+	label{
+		color:#fff;
+	}
+	.nope{
+		background-color:#ccc;
+	}
+	.error{
+		color:#ff5959;
+	}
+	.sure{
+		color:#11ff11;
+	}
+</style>
+	<form method="post" class="form-horizontal">
+		<div class="form-group">
+			<label class="col-md-1 control-label">房间</label>
+			<div class="col-md-2">
+				<input class="form-control col-md-7 room" type="text" name="room"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-1 control-label">数值</label>
+			<div class="col-md-2">
+				<input class="form-control col-md-7 count" type="text" name="count"/>
+			</div>
+		</div>
+		
+		<div class="col-md-2 col-md-offset-1">
+			    <div  class="btn btn-primary start" >开始</div>
+			    <div  class="btn btn-primary end nope" >停止</div>
+		</div><br>
+		<div class="col-md-2 col-md-offset-1">
+			    <p class="error tip"></p>
+		</div>
+
+	</form>
+	<br>
+	<% if (success) { %>
+	  <div><%= success %></div>
+	<% } %>
+	<% if (error) { %>
+	  <div class="error"><%= error %> </div>
+	<% } %>
+<% include footer.ejs %>
+<script>
+$(function(){
+
+
+	function Danmu(){
+
+	}
+	Danmu.prototype = {
+		init:function(){
+			that = this;
+			that.getCookie();
+			this.bind();
+		},
+		bind:function(){
+				$('.start').click(function(){
+					if($(this).hasClass('nope')){
+						return false;
+					}
+					var room = $.trim($('.room').val());
+					var count = $.trim($('.count').val());
+					
+					if(room ==''||count==''){
+						$('.tip').text('没填写完整');
+						return false;
+					}
+					if(isNaN(room) || isNaN(count)){
+						$('.tip').text('房间和人气值必须是数字哦');
+						return false;
+					}
+					var opts = {
+						url:'/zhushou/renqiStart',
+						type:'POST',
+						async:false,
+						cache:false,
+						data:{
+							room:room,
+							count:count
+						},
+						success:function(data){
+							console.log(data)
+							console.log(data.code)
+							if(data.code ==0){
+								$('input').attr('disabled',true)
+								$('.start').addClass('nope')
+								$('.end').removeClass('nope')
+								$('.tip').addClass('sure').text(data.msg);
+							}else{
+								$('.tip').removeClass('sure').text(data.msg);
+							}
+						}
+					};
+					$.ajax(opts);
+				})
+
+				$('.end').click(function(){
+					var opts = {
+						url:'/zhushou/renqiEnd',
+						type:'POST',
+						async:false,
+						cache:false,
+						data:{
+							room:$('.room').val()
+						},
+						success:function(data){
+							console.log(data)
+							if(data.code ==0){
+								$('input').removeAttr('disabled')
+								$('.start').removeClass('nope')
+								$('.end').addClass('nope')
+								$('.tip').addClass('sure').text(data.msg);
+							}else{
+								$('.tip').removeClass('sure').text(data.msg);
+							}
+						}
+					};
+					$.ajax(opts);
+				})
+		},
+		getCookie:function(){
+			var opts = {
+				url:'http://127.0.0.1:8888/zhushou/cookie',
+				type:'GET',
+				cache:'false',
+				success:function(data){
+					console.log(data);
+				}
+			};
+			$.ajax(opts)
+		},
+		getIP:function(){
+			var opts = {
+				url:'http://127.0.0.1:8888/zhushou/ip',
+				type:'GET',
+				cache:'false',
+				success:function(data){
+					console.log(data);
+				}
+			};
+			$.ajax(opts)
+		}
+	}
+
+	
+
+
+
+
+
+
+
+
+})
+
+	
+</script>
+

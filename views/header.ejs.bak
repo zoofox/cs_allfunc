@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/css/style.css' />
+    <link rel='stylesheet' href='/css/dh.css' />
+    
+  </head>
+  <body>
+  <ul class="nav nav-pills nav-stacked col-md-1">
+  <% if (user) { %>
+
+   <li style="color:green">欢迎，<%= user.name %></li>
+   <li style="color:green">注册时间：<%= new Date(user.time).toLocaleString() %></li>
+   <% if (user.type==0) { %>
+   <li style="color:green">类型：永久</li>
+   <% } else { %>
+   <li style="color:green">类型：一个月</li>
+    <% } %>
+    <% if (user.type==0) { %>
+   <li style="color:green">过期时间：永久</li>
+   <% } else { %>
+   <li style="color:green">过期时间：<%= new Date(parseInt(user.time)+2592000000).toLocaleString() %></li>
+    <% } %>
+    
+   <% if (user.name == "admin") { %>
+     <li><a href="/register">注册</a></li>
+     <li><a href="/users">用户</a></li>
+  <% } %>
+      <li><a href="/zhushou">助手</a></li>
+      <li><a href="/zhushou/danmu">弹幕</a></li>
+      <li><a href="/logout">注销</a></li>
+<% } else { %>
+  <li style="border:1px solid blue;border-radius:10px;text-align:center;"><a href="/login">登录</a></li>
+<% } %>
+</ul>
+<div class="col-md-11">

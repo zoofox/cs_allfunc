@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/css/style.css' />
+    <link rel='stylesheet' href='/css/dh.css' />
+      <link rel='stylesheet' href='/css/easyui.css' />
+  </head>
+  <body>
+  <ul class="nav nav-pills nav-stacked col-md-1">
+  <% if (user) { %>
+   <% if (user.name == "admin") { %>
+     <li><a href="/register">注册</a></li>
+     <li><a href="/users">用户</a></li>
+  <% } %>
+      <li><a href="/zhushou/ganxie">直播助手</a></li>
+      <li><a href="/logout">注销</a></li>
+<% } else { %>
+  <li style="border:1px solid blue;border-radius:10px;text-align:center;"><a href="/login">登录</a></li>
+<% } %>
+</ul>
+<div class="col-md-11">

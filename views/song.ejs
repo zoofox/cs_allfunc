@@ -1,0 +1,61 @@
+
+<div class="col-md-5 col-md-offset-1 box box-top">
+		<form method="post" class="form-horizontal from-read" data-username="<%= user.name %>">
+		<fieldset>
+			<% if (user.read == 1) { %>
+			    <legend>点歌</legend>
+			<% } else { %>
+					<% if (user.read == 2) { %>
+					    <legend>点歌（月卡）</legend>
+					<% } else { %>
+						<legend>点歌（功能未激活）</legend>
+					<% } %>
+			<% } %>
+
+		<div class="form-group">
+			<label class="col-md-3 control-label">房间</label>
+			<div class="col-md-8">
+				<input class="form-control col-md-7 room-read  input-read" type="text"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-3 control-label">正在播放：</label>
+			<div class="col-md-8">
+				<label class="col-md-3 control-label isplaying">--</label>
+				<div  class="btn btn-primary change-song" >切歌</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<table id="tt" class="easyui-datagrid" style="width:410px;height:500px"
+		      title="待播放列表" iconCls="icon-save" url="" method='get' rownumbers='true',>
+		    <thead>
+		      <tr>
+		        <th field="phone" width="100">歌曲名</th>
+		        <th field="password" width="100" align="right">歌手</th>
+		        <th field="status" width="100" align="center" >点歌用户昵称</th>
+		        <th field="handler" width="50" align="center" >操作</th>
+		      </tr>
+		    </thead>
+		  </table>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-md-3 control-label">弹幕点歌</label>
+			<div class="col-md-8">
+				<label class="col-md-3 control-label">输入弹幕： 点歌，歌名 即可进行点歌</label>
+			</div>
+		</div>
+		<div class="col-md-8 col-md-offset-3">
+			    <div  class="btn btn-primary startSong" >开始</div>
+			    <div  class="btn btn-primary endSong nope" >停止</div><br>
+		</div><br>
+
+		<div class="col-md-8 col-md-offset-3">
+			    <p class="error tip-read"></p>
+		</div>
+</fieldset>
+	</form>
+</div>
+<script>
+	$('#tt').datagrid('load',{});
+</script>
